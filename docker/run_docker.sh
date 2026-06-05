@@ -14,6 +14,7 @@ VERSION="0.1"
 IMAGE_NAME=${DOCKER_REPO}$BRAND:${VERSION}
 
 docker run \
+	--gpus all \
     -e USER=$user -e UID=$uid -e GID=$gid \
     -v $HERE:/workspace/adapt \
     -w /workspace/adapt \

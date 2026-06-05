@@ -165,6 +165,7 @@ class ResNet(nn.Module):
         width_per_group=64,
         replace_stride_with_dilation=None,
         norm_layer=None,
+        in_channel=3,
     ):
         super(ResNet, self).__init__()
         if norm_layer is None:
@@ -187,10 +188,11 @@ class ResNet(nn.Module):
 
         # CIFAR10: kernel_size 7 -> 3, stride 2 -> 1, padding 3->1
         if use_adapt:
-            self.conv1 = approxNN.AdaPT_Conv2d(1, self.inplanes, kernel_size=3, stride=1, padding=1, bias=False, axx_mult=axx_mult_global)
+            self.conv1 = approxNN.AdaPT_Conv2d(
+                in_channel, self.inplanes, kernel_size=3, stride=1, padding=1, bias=False, axx_mult=axx_mult_global)
         else:
             self.conv1 = nn.Conv2d(
-            1, self.inplanes, kernel_size=3, stride=1, padding=1, bias=False
+            in_channel, self.inplanes, kernel_size=3, stride=1, padding=1, bias=False
             )
         # END
 

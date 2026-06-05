@@ -206,7 +206,7 @@ class AdaPT_Conv2d(_ConvNd):
         
         #Jit compilation method for cpp extention
         #set PyInit_ prefix to comply with the python module name
-        self.axx_conv2d_kernel = load(name='PyInit_conv2d_'+axx_mult, sources=["/workspace/adapt/adapt/cpu-kernels/axx_conv2d.cpp"], extra_cflags = ['-DAXX_MULT=' + axx_mult + ' -fopenmp -O3' ], extra_ldflags=['-lgomp'], verbose=True)
+        self.axx_conv2d_kernel = load(name='PyInit_conv2d_'+axx_mult, sources=["/workspace/adapt/adapt/cpu-kernels/axx_conv2d.cpp"], extra_cflags = ['-DAXX_MULT=' + axx_mult + ' -march=native -fopenmp -O3' ], extra_ldflags=['-lgomp'], verbose=True)
         
         if groups != 1 and groups != in_channels:
             raise ValueError('AdaPT_Conv2d does not support groups != in_channels')
